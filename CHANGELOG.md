@@ -1,6 +1,6 @@
 # Journal des modifications
 
-## [1.1.6] - 2026-10-08
+## [1.1.7] - 2026-10-08
 ### Nouveautés
 - Mode développeur : console de logs en temps réel avec couleurs (succès, avertissements, erreurs) et outils de test
 - Numéros de ligne dans l'éditeur et compteur de lignes dans la barre d'état
@@ -20,9 +20,4 @@
 - Version de test pour le webhook release.
 
 ## [1.1.0] - 2026-10-07
-### Nouveautés
-- Initialisation des fonctionnalités principales.
-
-## [1.0.0] - 2026-10-06
-### Nouveautés
-- Première version : onglets, auto-save, récupération après crash, détection des modifications externes, Discord RPC
+...
