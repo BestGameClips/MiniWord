@@ -1,8 +1,8 @@
 # Journal des modifications
 
-## [1.1.4] - 2026-10-08
+## [1.1.6] - 2026-10-08
 ### Nouveautés
-- Publication automatique de la version.
+- Publication automatique de la version 1.1.6.
 
 ## [1.2.0] - 2026-10-08
 ### Nouveautés
