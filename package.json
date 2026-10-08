@@ -1,7 +1,7 @@
 {
   "name": "miniword",
   "productName": "MiniWord",
-  "version": "1.1.6",
+  "version": "1.1.7",
   "description": "Une application de traitement de texte légère pour ordinateur.",
   "main": "src/main/main.js",
   "author": "MiniWord",
