@@ -1,0 +1,39 @@
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; overflow: hidden; }
+body {
+  font-family: "Segoe UI", Inter, system-ui, -apple-system, Roboto, "Helvetica Neue", sans-serif;
+  font-size: 13.5px; line-height: 1.4; color: var(--text); background: var(--bg-frame);
+  -webkit-font-smoothing: antialiased; user-select: none; cursor: default;
+}
+button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
+button:disabled { cursor: not-allowed; opacity: .45; }
+input, select, textarea { font: inherit; color: inherit; }
+[hidden] { display: none !important; }
+:focus { outline: none; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; border-radius: 4px; }
+::selection { background: var(--selection); }
+.icon { display: inline-flex; align-items: center; justify-content: center; flex: none; }
+.icon svg { display: block; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* Barres de défilement */
+::-webkit-scrollbar { width: 12px; height: 12px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--scroll-thumb); border-radius: 8px; border: 3px solid transparent; background-clip: padding-box; }
+::-webkit-scrollbar-thumb:hover { background: var(--scroll-thumb-hover); background-clip: padding-box; border: 3px solid transparent; }
+::-webkit-scrollbar-corner { background: transparent; }
+
+/* Info-bulles */
+[data-tip] { position: relative; }
+[data-tip]:hover::after, [data-tip]:focus-visible::after {
+  content: attr(data-tip); position: absolute; z-index: 1000; left: 50%; top: calc(100% + 6px); transform: translateX(-50%);
+  background: var(--tooltip-bg); color: var(--tooltip-fg); padding: 4px 8px; border-radius: 6px; font-size: 12px; white-space: nowrap;
+  pointer-events: none; box-shadow: var(--shadow-sm);
+}
+[data-tip-side="right"]:hover::after, [data-tip-side="right"]:focus-visible::after { left: calc(100% + 8px); top: 50%; transform: translateY(-50%); }
+[data-tip-side="top"]:hover::after, [data-tip-side="top"]:focus-visible::after { top: auto; bottom: calc(100% + 6px); }
+[data-tip-side="left"]:hover::after, [data-tip-side="left"]:focus-visible::after { left: auto; right: 0; transform: none; }
+
+/* Animations désactivables */
+[data-animations="off"] *, [data-animations="off"] *::before, [data-animations="off"] *::after { transition: none !important; animation: none !important; }
+@media (prefers-reduced-motion: reduce) { * { transition-duration: .01ms !important; animation-duration: .01ms !important; } }

@@ -1,0 +1,20 @@
+# Compile et publie l'installateur Windows quand un tag vX.Y.Z est poussé.
+# Les fichiers (exe, zip, latest.yml) servent aux mises à jour automatiques de l'application.
+name: Release
+on:
+  push:
+    tags: ['v*.*.*']
+permissions:
+  contents: write
+jobs:
+  windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm }
+      - run: npm ci
+      - run: npm test
+      - run: npx electron-builder --win --publish always
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

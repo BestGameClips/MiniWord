@@ -1,0 +1,54 @@
+# Configuration electron-builder — `npm run dist` produit l'installateur Windows dans dist/
+appId: com.miniword.app
+productName: MiniWord          # ← à garder identique à appName dans app.config.js
+copyright: © 2026 MiniWord
+
+directories:
+  output: dist
+  buildResources: assets
+
+files:
+  - src/**/*
+  - assets/**/*
+  - app.config.js
+  - CHANGELOG.md
+  - package.json
+  - "!**/*.map"
+
+asar: true
+# Les mises à jour lisent le dépôt défini dans app.config.js › github (voir README).
+# Pour que `electron-builder --publish always` (workflow GitHub) sache où publier, remplace owner/repo :
+publish:
+  provider: github
+  owner: OWNER_A_REMPLACER
+  repo: REPO_A_REMPLACER
+
+win:
+  icon: assets/icons/icon.ico  # ← remplace ce fichier pour changer l'icône
+  target:
+    - target: nsis          # installateur
+      arch: [x64]
+    - target: zip           # archive compressée (version portable)
+      arch: [x64]
+  artifactName: ${productName}-Setup-${version}.${ext}
+
+nsis:
+  oneClick: false                          # assistant d'installation classique
+  perMachine: false                        # installation pour l'utilisateur (sans droits admin)
+  allowToChangeInstallationDirectory: true
+  createDesktopShortcut: true              # mettre false pour ne pas créer de raccourci bureau
+  createStartMenuShortcut: true
+  shortcutName: MiniWord
+  runAfterFinish: true                     # case « Lancer MiniWord » en fin d'installation
+  deleteAppDataOnUninstall: false          # les documents et paramètres sont conservés
+  uninstallDisplayName: MiniWord
+
+linux:
+  icon: assets/icons/icon.png
+  target: [AppImage, deb]
+  category: Office
+
+mac:
+  icon: assets/icons/icon.icns
+  category: public.app-category.productivity
+  target: dmg

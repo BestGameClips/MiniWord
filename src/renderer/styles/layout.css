@@ -1,0 +1,54 @@
+#app { display: flex; flex-direction: column; height: 100%; }
+
+/* ── Barre de titre ── */
+#titlebar { flex: none; height: 36px; display: grid; grid-template-columns: 1fr minmax(0, 2fr) 1fr; align-items: center; background: var(--bg-frame); -webkit-app-region: drag; }
+.tb-left { display: flex; align-items: center; gap: 8px; padding-left: 12px; min-width: 0; }
+.tb-left img { border-radius: 4px; }
+.tb-appname { font-weight: 600; font-size: 12.5px; color: var(--text-dim); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.tb-title { text-align: center; font-size: 12.5px; color: var(--text-dim); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding: 0 12px; }
+.tb-controls { display: flex; justify-content: flex-end; height: 100%; -webkit-app-region: no-drag; }
+.tb-btn { width: 46px; height: 100%; display: inline-flex; align-items: center; justify-content: center; color: var(--text-dim); transition: background .12s, color .12s; border-radius: 0; }
+.tb-btn:hover { background: var(--bg-hover); color: var(--text); }
+.tb-close:hover { background: var(--danger); color: #fff; }
+[data-fullscreen="true"] #titlebar { display: none; }
+[data-platform="darwin"] .tb-controls { display: none; }
+
+/* ── Corps ── */
+#main { flex: 1; min-height: 0; display: flex; padding: 0 0 0 0; gap: 0; }
+#sidebar { flex: none; width: 236px; background: var(--bg-frame); display: flex; flex-direction: column; padding: 4px 8px 8px; transition: width .16s ease; overflow: hidden; }
+#sidebar[data-collapsed="true"] { width: 60px; }
+#workspace { flex: 1; min-width: 0; display: flex; flex-direction: column; background: var(--bg-panel); border-radius: var(--radius) 0 0 0; border-top: 1px solid var(--border); border-left: 1px solid var(--border); overflow: hidden; position: relative; }
+#editor-row { flex: 1; min-height: 0; display: flex; }
+#editor-wrap { flex: 1; min-width: 0; min-height: 0; position: relative; background: var(--bg-editor); overflow: hidden; }
+
+/* ── Éditeur ── */
+#editor, #editor-layer, #editor-measure {
+  position: absolute; inset: 0; margin: 0; width: 100%; height: 100%; border: 0; border-radius: 0;
+  padding: 18px 28px 40px; font-family: var(--editor-font); font-size: var(--editor-font-size); line-height: var(--editor-line-height);
+  tab-size: var(--editor-tab-size); -moz-tab-size: var(--editor-tab-size); letter-spacing: normal; word-spacing: normal; text-rendering: auto;
+  white-space: pre-wrap; overflow-wrap: break-word; font-variant-ligatures: none;
+}
+#editor { background: transparent; color: var(--text); resize: none; overflow: auto; scrollbar-gutter: stable; user-select: text; cursor: text; caret-color: var(--accent); }
+#editor-measure { visibility: hidden; pointer-events: none; inset: auto; top: 0; left: 0; right: 0; height: auto; width: auto; padding-right: 40px; }
+#editor-layer { overflow: hidden; scrollbar-gutter: stable; pointer-events: none; color: transparent; user-select: none; }
+[data-wrap="off"] #editor, [data-wrap="off"] #editor-layer, [data-wrap="off"] #editor-measure { white-space: pre; overflow-wrap: normal; }
+#editor-layer mark { color: transparent; background: var(--match); border-radius: 2px; }
+#editor-layer mark.cur { background: var(--match-current); }
+#editor-layer i { font-style: normal; color: transparent; position: relative; }
+#editor-layer i.s::before { content: "·"; position: absolute; left: 0; color: var(--invisible); }
+#editor-layer i.t::before { content: "→"; position: absolute; left: 0; color: var(--invisible); }
+#editor-layer i.n::before { content: "¶"; position: absolute; left: 0; color: var(--invisible); }
+
+#empty-state { position: absolute; inset: 0; overflow: auto; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 22px; padding: 30px; text-align: center; }
+#empty-state img { width: 84px; height: 84px; border-radius: 22px; box-shadow: var(--shadow-sm); }
+#empty-state h1 { margin: 0; font-size: 24px; font-weight: 650; letter-spacing: -.01em; }
+#empty-state p { margin: 0; color: var(--text-dim); max-width: 46ch; }
+.empty-actions { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+.empty-recents { width: min(420px, 100%); text-align: left; }
+.empty-recents h2 { font-size: 12px; font-weight: 600; color: var(--text-faint); margin: 0 0 6px 8px; }
+
+#statusbar { flex: none; height: 26px; display: flex; align-items: center; gap: 2px; padding: 0 8px; background: var(--bg-frame); color: var(--text-dim); font-size: 12px; border-top: 1px solid var(--border); }
+#statusbar[hidden] { display: none; }
+#drop-overlay { position: fixed; inset: 0; z-index: 900; background: var(--backdrop); display: flex; align-items: center; justify-content: center; pointer-events: none; }
+#drop-overlay > div { padding: 28px 44px; border: 2px dashed var(--accent); border-radius: calc(var(--radius) + 6px); background: var(--bg-raised); font-size: 17px; font-weight: 600; }
+#toasts { position: fixed; right: 16px; bottom: 40px; z-index: 2000; display: flex; flex-direction: column; gap: 8px; align-items: flex-end; pointer-events: none; }

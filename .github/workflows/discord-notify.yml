@@ -1,0 +1,17 @@
+# Envoie les notes de patch sur un salon Discord dès qu'une release est publiée.
+# Secret requis : DISCORD_WEBHOOK_URL (Paramètres du salon › Intégrations › Webhooks).
+name: Discord notification
+on:
+  release:
+    types: [published]
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: { ref: '${{ github.event.release.tag_name }}' }
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - run: node scripts/notify-discord.js
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
