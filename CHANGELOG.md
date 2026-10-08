@@ -1,4 +1,7 @@
 # Journal des modifications
+## [1.1.4] - AAAA-MM-JJ
+###Nouveauté
+- ajuste le format de l'en-tête du changelog
 
 ## [1.1.0] - 2026-10-07
 ### Nouveautés
